@@ -32,6 +32,47 @@ namespace Backpropagation
             }
         }
 
+        public void boxDisplay(PictureBox pb)
+        {
+            if (pb.BackColor == Color.Black)
+            {
+                pb.BackColor = Color.White;
+            }
+            else
+            {
+                pb.BackColor = Color.Black;
+            }
+        }
+
+        public void resetDisplay()
+        {
+            outputBox1.BackColor = Color.White;
+            outputBox2.BackColor = Color.White;
+            outputBox3.BackColor = Color.White;
+            outputBox4.BackColor = Color.White;
+            outputBox5.BackColor = Color.White;
+            outputBox6.BackColor = Color.White;
+            outputBox7.BackColor = Color.White;
+            outputBox8.BackColor = Color.White;
+            outputBox9.BackColor = Color.White;
+            outputBox10.BackColor = Color.White;
+            outputBox11.BackColor = Color.White;
+            outputBox12.BackColor = Color.White;
+            outputBox13.BackColor = Color.White;
+            outputBox14.BackColor = Color.White;
+            outputBox15.BackColor = Color.White;
+            outputBox16.BackColor = Color.White;
+            outputBox17.BackColor = Color.White;
+            outputBox18.BackColor = Color.White;
+            outputBox19.BackColor = Color.White;
+            outputBox20.BackColor = Color.White;
+            outputBox21.BackColor = Color.White;
+            outputBox22.BackColor = Color.White;
+            outputBox23.BackColor = Color.White;
+            outputBox24.BackColor = Color.White;
+            outputBox25.BackColor = Color.White;
+        }
+
         private int Identifier(PictureBox pb)
         {
             if (pb.BackColor == Color.Black)
@@ -186,7 +227,7 @@ namespace Backpropagation
                 nn.setInputs(5, 0);
                 nn.setInputs(6, 0);
                 nn.setInputs(7, 1);
-                nn.setInputs(8, 1);
+                nn.setInputs(8, 0);
                 nn.setInputs(9,  0);
                 nn.setInputs(10, 1);
                 nn.setInputs(11, 1);
@@ -340,6 +381,7 @@ namespace Backpropagation
             label5.Text = "" + nn.getOuputData(3);
             label6.Text = "" + nn.getOuputData(4);
 
+            resetDisplay();
             Classification();
         }
 
@@ -394,19 +436,14 @@ namespace Backpropagation
             switch (binaryEquivalent)
             {
                 case 0:
-                    label1.Text = "+";
                     break;
                 case 1:
-                    label1.Text = "-";
                     break;
                 case 10:
-                    label1.Text = "/";
                     break;
                 case 11:
-                    label1.Text = "/";
                     break;
                 default:
-                    label1.Text = "";
                     break;
             }
         }
