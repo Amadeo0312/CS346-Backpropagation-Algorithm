@@ -1,37 +1,46 @@
-﻿using System;
+﻿using Backprop;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Backpropagation
 {
     public partial class Form1 : Form
     {
+        private NeuralNet nn;
+        private List<int> inputData = new List<int>(25) { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private int binaryEquivalent = 0;
         public Form1()
         {
             InitializeComponent();
+            button2.Enabled = false;
+            button3.Enabled = false;
         }
 
-        public int boxClick(PictureBox pb)
+        public void boxClick(PictureBox pb)
         {
             if (pb.BackColor == Color.Black)
             {
                 pb.BackColor = Color.White;
-                return -1;
             }
             else
             {
                 pb.BackColor = Color.Black;
-                return 1;
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private int Identifier(PictureBox pb)
+        {
+            if (pb.BackColor == Color.Black)
+            {
+                return 1;
+            }
+            return 0;
+        }
+            private void pictureBox1_Click(object sender, EventArgs e)
         {
             boxClick(pictureBox1);
         }
@@ -152,6 +161,254 @@ namespace Backpropagation
         private void pictureBox25_Click(object sender, EventArgs e)
         {
             boxClick(pictureBox25);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            nn = new NeuralNet(25, 5, 5);
+            button2.Enabled = true;
+            button3.Enabled = true;
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GetData();
+            int noOfEpoch = Convert.ToInt32(textBox1.Text);
+            for(int i = 0; i < noOfEpoch; i++) 
+            {
+                // +
+                nn.setInputs(0, 0);
+                nn.setInputs(1, 0);
+                nn.setInputs(2, 1);
+                nn.setInputs(3, 0);
+                nn.setInputs(4, 0);
+                nn.setInputs(5, 0);
+                nn.setInputs(6, 0);
+                nn.setInputs(7, 1);
+                nn.setInputs(8, 1);
+                nn.setInputs(9,  0);
+                nn.setInputs(10, 1);
+                nn.setInputs(11, 1);
+                nn.setInputs(12, 1);
+                nn.setInputs(13, 1);
+                nn.setInputs(14, 1);
+                nn.setInputs(15, 0);
+                nn.setInputs(16, 0);
+                nn.setInputs(17, 1);
+                nn.setInputs(18, 0);
+                nn.setInputs(19, 0);
+                nn.setInputs(20, 0);
+                nn.setInputs(21, 0);
+                nn.setInputs(22, 1);
+                nn.setInputs(23, 0);
+                nn.setInputs(24, 0);
+
+                // 0 0 0 0
+                nn.setDesiredOutput(0, 0);
+                nn.setDesiredOutput(1, 0);
+                nn.setDesiredOutput(2, 0);
+                nn.setDesiredOutput(3, 0);
+                nn.setDesiredOutput(4, 0);
+                nn.learn();
+
+
+                // -
+                nn.setInputs(0, 0);
+                nn.setInputs(1, 0);
+                nn.setInputs(2, 0);
+                nn.setInputs(3, 0);
+                nn.setInputs(4, 0);
+                nn.setInputs(5, 0);
+                nn.setInputs(6, 0);
+                nn.setInputs(7, 0);
+                nn.setInputs(8, 0);
+                nn.setInputs(9, 0);
+                nn.setInputs(10, 1);
+                nn.setInputs(11, 1);
+                nn.setInputs(12, 1);
+                nn.setInputs(13, 1);
+                nn.setInputs(14, 1);
+                nn.setInputs(15, 0);
+                nn.setInputs(16, 0);
+                nn.setInputs(17, 0);
+                nn.setInputs(18, 0);
+                nn.setInputs(19, 0);
+                nn.setInputs(20, 0);
+                nn.setInputs(21, 0);
+                nn.setInputs(22, 0);
+                nn.setInputs(23, 0);
+                nn.setInputs(24, 0);
+
+                // 0 0 0 1
+                nn.setDesiredOutput(0, 0);
+                nn.setDesiredOutput(1, 0);
+                nn.setDesiredOutput(2, 0);
+                nn.setDesiredOutput(3, 0);
+                nn.setDesiredOutput(4, 1);
+                nn.learn();
+
+
+                // /
+                nn.setInputs(0, 0);
+                nn.setInputs(1, 0);
+                nn.setInputs(2, 0);
+                nn.setInputs(3, 0);
+                nn.setInputs(4, 1);
+                nn.setInputs(5, 0);
+                nn.setInputs(6, 0);
+                nn.setInputs(7, 0);
+                nn.setInputs(8, 1);
+                nn.setInputs(9, 0);
+                nn.setInputs(10, 0);
+                nn.setInputs(11, 0);
+                nn.setInputs(12, 1);
+                nn.setInputs(13, 0);
+                nn.setInputs(14, 0);
+                nn.setInputs(15, 0);
+                nn.setInputs(16, 1);
+                nn.setInputs(17, 0);
+                nn.setInputs(18, 0);
+                nn.setInputs(19, 0);
+                nn.setInputs(20, 1);
+                nn.setInputs(21, 0);
+                nn.setInputs(22, 0);
+                nn.setInputs(23, 0);
+                nn.setInputs(24, 0);
+
+                // 0 0 0 1 0 
+                nn.setDesiredOutput(0, 0);
+                nn.setDesiredOutput(1, 0);
+                nn.setDesiredOutput(2, 0);
+                nn.setDesiredOutput(3, 1);
+                nn.setDesiredOutput(4, 0);
+                nn.learn();
+
+
+                // x
+                nn.setInputs(0, 1);
+                nn.setInputs(1, 0);
+                nn.setInputs(2, 0);
+                nn.setInputs(3, 0);
+                nn.setInputs(4, 1);
+                nn.setInputs(5, 0);
+                nn.setInputs(6, 1);
+                nn.setInputs(7, 0);
+                nn.setInputs(8, 1);
+                nn.setInputs(9, 0);
+                nn.setInputs(10, 0);
+                nn.setInputs(11, 0);
+                nn.setInputs(12, 1);
+                nn.setInputs(13, 0);
+                nn.setInputs(14, 0);
+                nn.setInputs(15, 0);
+                nn.setInputs(16, 1);
+                nn.setInputs(17, 0);
+                nn.setInputs(18, 1);
+                nn.setInputs(19, 0);
+                nn.setInputs(20, 1);
+                nn.setInputs(21, 0);
+                nn.setInputs(22, 0);
+                nn.setInputs(23, 0);
+                nn.setInputs(24, 1);
+
+                // 0 0 0 1 1 
+                nn.setDesiredOutput(0, 0);
+                nn.setDesiredOutput(1, 0);
+                nn.setDesiredOutput(2, 0);
+                nn.setDesiredOutput(3, 1);
+                nn.setDesiredOutput(4, 1);
+                nn.learn();
+            }
+
+           
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GetData();
+
+            // get input data from the UI
+            for (int i = 0; i < inputData.Count(); i++)
+            {
+                nn.setInputs(i, inputData[i]);
+            }
+            nn.run();
+            label2.Text = "" + nn.getOuputData(0);
+            label3.Text = "" + nn.getOuputData(1);
+            label4.Text = "" + nn.getOuputData(2);
+            label5.Text = "" + nn.getOuputData(3);
+            label6.Text = "" + nn.getOuputData(4);
+
+            Classification();
+        }
+
+        private int Threshold(double output)
+        {
+            if (output >= 0.5)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        private void GetData()
+        {
+            inputData.Clear();
+            inputData.Add(Identifier(pictureBox1));
+            inputData.Add(Identifier(pictureBox2));
+            inputData.Add(Identifier(pictureBox3));
+            inputData.Add(Identifier(pictureBox4));
+            inputData.Add(Identifier(pictureBox5));
+            inputData.Add(Identifier(pictureBox6));
+            inputData.Add(Identifier(pictureBox7));
+            inputData.Add(Identifier(pictureBox8));
+            inputData.Add(Identifier(pictureBox9));
+            inputData.Add(Identifier(pictureBox10));
+            inputData.Add(Identifier(pictureBox11));
+            inputData.Add(Identifier(pictureBox12));
+            inputData.Add(Identifier(pictureBox13));
+            inputData.Add(Identifier(pictureBox14));
+            inputData.Add(Identifier(pictureBox15));
+            inputData.Add(Identifier(pictureBox16));
+            inputData.Add(Identifier(pictureBox17));
+            inputData.Add(Identifier(pictureBox18));
+            inputData.Add(Identifier(pictureBox19));
+            inputData.Add(Identifier(pictureBox20));
+            inputData.Add(Identifier(pictureBox21));
+            inputData.Add(Identifier(pictureBox22));
+            inputData.Add(Identifier(pictureBox23));
+            inputData.Add(Identifier(pictureBox24));
+            inputData.Add(Identifier(pictureBox25));
+        }
+
+        private void Classification()
+        {
+            binaryEquivalent = 0;
+            binaryEquivalent += 10000 * Threshold(nn.getOuputData(0));
+            binaryEquivalent += 1000 * Threshold(nn.getOuputData(1));
+            binaryEquivalent += 100 * Threshold(nn.getOuputData(2));
+            binaryEquivalent += 10 * Threshold(nn.getOuputData(3));
+            binaryEquivalent += 1 * Threshold(nn.getOuputData(4));
+
+            switch (binaryEquivalent)
+            {
+                case 0:
+                    label1.Text = "+";
+                    break;
+                case 1:
+                    label1.Text = "-";
+                    break;
+                case 10:
+                    label1.Text = "/";
+                    break;
+                case 11:
+                    label1.Text = "/";
+                    break;
+                default:
+                    label1.Text = "";
+                    break;
+            }
         }
     }
 }

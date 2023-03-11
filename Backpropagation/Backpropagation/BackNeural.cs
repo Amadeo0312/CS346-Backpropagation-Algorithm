@@ -36,7 +36,7 @@ namespace Backprop
 		}
 		public void createNeurons(int i,int h,int o)
 		{
-			for (int x=0;x<i;x++)
+			for (int x=0;x<i;x++)	
 			{
 				ineuron[x]=new INeuron(x,h);
 			}
