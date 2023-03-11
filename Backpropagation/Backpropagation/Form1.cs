@@ -11,7 +11,8 @@ namespace Backpropagation
     public partial class Form1 : Form
     {
         private NeuralNet nn;
-        private List<int> inputData = new List<int>(25) { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private List<int> inputData = new List<int>(new int[25]);
+        Color fill = Color.FromArgb(0, 34, 56);
         private int binaryEquivalent = 0;
         public Form1()
         {
@@ -19,71 +20,9 @@ namespace Backpropagation
             button2.Enabled = false;
             button3.Enabled = false;
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-        public void boxClick(PictureBox pb)
-        {
-            if (pb.BackColor == Color.Black)
-            {
-                pb.BackColor = Color.White;
-            }
-            else
-            {
-                pb.BackColor = Color.Black;
-            }
-        }
-
-        public void boxDisplay(PictureBox pb)
-        {
-            if (pb.BackColor == Color.Black)
-            {
-                pb.BackColor = Color.White;
-            }
-            else
-            {
-                pb.BackColor = Color.Black;
-            }
-        }
-
-        public void resetDisplay()
-        {
-            outputBox1.BackColor = Color.White;
-            outputBox2.BackColor = Color.White;
-            outputBox3.BackColor = Color.White;
-            outputBox4.BackColor = Color.White;
-            outputBox5.BackColor = Color.White;
-            outputBox6.BackColor = Color.White;
-            outputBox7.BackColor = Color.White;
-            outputBox8.BackColor = Color.White;
-            outputBox9.BackColor = Color.White;
-            outputBox10.BackColor = Color.White;
-            outputBox11.BackColor = Color.White;
-            outputBox12.BackColor = Color.White;
-            outputBox13.BackColor = Color.White;
-            outputBox14.BackColor = Color.White;
-            outputBox15.BackColor = Color.White;
-            outputBox16.BackColor = Color.White;
-            outputBox17.BackColor = Color.White;
-            outputBox18.BackColor = Color.White;
-            outputBox19.BackColor = Color.White;
-            outputBox20.BackColor = Color.White;
-            outputBox21.BackColor = Color.White;
-            outputBox22.BackColor = Color.White;
-            outputBox23.BackColor = Color.White;
-            outputBox24.BackColor = Color.White;
-            outputBox25.BackColor = Color.White;
-        }
-
-        private int Identifier(PictureBox pb)
-        {
-            if (pb.BackColor == Color.Black)
-            {
-                return 1;
-            }
-            return 0;
-        }
-            private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            boxClick(pictureBox1);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -207,9 +146,9 @@ namespace Backpropagation
         private void button1_Click(object sender, EventArgs e)
         {
             nn = new NeuralNet(25, 5, 5);
+            button1.Enabled = false;
             button2.Enabled = true;
             button3.Enabled = true;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -253,7 +192,6 @@ namespace Backpropagation
                 nn.setDesiredOutput(4, 0);
                 nn.learn();
 
-
                 // -
                 nn.setInputs(0, 0);
                 nn.setInputs(1, 0);
@@ -289,7 +227,6 @@ namespace Backpropagation
                 nn.setDesiredOutput(4, 1);
                 nn.learn();
 
-
                 // /
                 nn.setInputs(0, 0);
                 nn.setInputs(1, 0);
@@ -324,7 +261,6 @@ namespace Backpropagation
                 nn.setDesiredOutput(3, 1);
                 nn.setDesiredOutput(4, 0);
                 nn.learn();
-
 
                 // x
                 nn.setInputs(0, 1);
@@ -368,21 +304,77 @@ namespace Backpropagation
         private void button3_Click(object sender, EventArgs e)
         {
             GetData();
-
             // get input data from the UI
             for (int i = 0; i < inputData.Count(); i++)
             {
                 nn.setInputs(i, inputData[i]);
             }
+
             nn.run();
-            label2.Text = "" + nn.getOuputData(0);
-            label3.Text = "" + nn.getOuputData(1);
-            label4.Text = "" + nn.getOuputData(2);
-            label5.Text = "" + nn.getOuputData(3);
-            label6.Text = "" + nn.getOuputData(4);
+
+            label2.Text = "Weight #1: " + Math.Round(nn.getOuputData(0), 6);
+            label3.Text = "Weight #2: " + Math.Round(nn.getOuputData(1), 6);
+            label4.Text = "Weight #3: " + Math.Round(nn.getOuputData(2), 6);
+            label5.Text = "Weight #4: " + Math.Round(nn.getOuputData(3), 6);
+            label6.Text = "Weight #5: " + Math.Round(nn.getOuputData(4), 6);
 
             resetDisplay();
             Classification();
+        }
+
+        public void boxClick(PictureBox pb)
+        {
+            if (pb.BackColor == fill)
+            {
+                pb.BackColor = Color.White;
+            }
+            else
+            {
+                pb.BackColor = fill;
+            }
+        }
+
+        public void resetDisplay()
+        {
+            outputBox1.BackColor = Color.White;
+            outputBox2.BackColor = Color.White;
+            outputBox3.BackColor = Color.White;
+            outputBox4.BackColor = Color.White;
+            outputBox5.BackColor = Color.White;
+            outputBox6.BackColor = Color.White;
+            outputBox7.BackColor = Color.White;
+            outputBox8.BackColor = Color.White;
+            outputBox9.BackColor = Color.White;
+            outputBox10.BackColor = Color.White;
+            outputBox11.BackColor = Color.White;
+            outputBox12.BackColor = Color.White;
+            outputBox13.BackColor = Color.White;
+            outputBox14.BackColor = Color.White;
+            outputBox15.BackColor = Color.White;
+            outputBox16.BackColor = Color.White;
+            outputBox17.BackColor = Color.White;
+            outputBox18.BackColor = Color.White;
+            outputBox19.BackColor = Color.White;
+            outputBox20.BackColor = Color.White;
+            outputBox21.BackColor = Color.White;
+            outputBox22.BackColor = Color.White;
+            outputBox23.BackColor = Color.White;
+            outputBox24.BackColor = Color.White;
+            outputBox25.BackColor = Color.White;
+        }
+
+        private int Identifier(PictureBox pb)
+        {
+            if (pb.BackColor == fill)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            boxClick(pictureBox1);
         }
 
         private int Threshold(double output)
@@ -423,7 +415,6 @@ namespace Backpropagation
             inputData.Add(Identifier(pictureBox24));
             inputData.Add(Identifier(pictureBox25));
         }
-
         private void Classification()
         {
             binaryEquivalent = 0;
@@ -436,16 +427,44 @@ namespace Backpropagation
             switch (binaryEquivalent)
             {
                 case 0:
+                    boxClick(outputBox3);
+                    boxClick(outputBox8);
+                    boxClick(outputBox11);
+                    boxClick(outputBox12);
+                    boxClick(outputBox13);
+                    boxClick(outputBox14);
+                    boxClick(outputBox15);
+                    boxClick(outputBox18);
+                    boxClick(outputBox23);
                     break;
                 case 1:
+                    boxClick(outputBox11);
+                    boxClick(outputBox12);
+                    boxClick(outputBox13);
+                    boxClick(outputBox14);
+                    boxClick(outputBox15);
                     break;
                 case 10:
+                    boxClick(outputBox5);
+                    boxClick(outputBox9);
+                    boxClick(outputBox13);
+                    boxClick(outputBox17);
+                    boxClick(outputBox21);
                     break;
                 case 11:
+                    boxClick(outputBox1);
+                    boxClick(outputBox5);
+                    boxClick(outputBox7);
+                    boxClick(outputBox9);
+                    boxClick(outputBox13);
+                    boxClick(outputBox17);
+                    boxClick(outputBox19);
+                    boxClick(outputBox21);
+                    boxClick(outputBox25);
                     break;
                 default:
                     break;
             }
-        }
+        } 
     }
 }
